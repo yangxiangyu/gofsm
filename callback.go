@@ -3,11 +3,11 @@ package fsm
 // EventProcessor defines OnExit, Action and OnEnter actions.
 type EventProcessor interface {
 	// OnExit Action handles exiting a state
-	OnExit(fromState interface{}, args []interface{})
+	OnExit(fromState int, args []interface{})
 	// Action is used to handle transitions
-	Action(action interface{}, fromState interface{}, toState interface{}, args []interface{})
+	Action(action int, fromState int, toState int, args []interface{})
 	// OnExit Action handles entering a state
-	OnEnter(toState interface{}, args []interface{})
+	OnEnter(toState int, args []interface{})
 }
 
 // DefaultDelegate is a default delegate.
@@ -17,7 +17,7 @@ type DefaultDelegate struct {
 }
 
 // HandleEvent implements Delegate interface and split HandleEvent into three actions.
-func (dd *DefaultDelegate) HandleEvent(action interface{}, fromState interface{}, toState interface{}, args []interface{}) {
+func (dd *DefaultDelegate) HandleEvent(action int, fromState int, toState int, args []interface{}) {
 	if fromState != toState {
 		dd.P.OnExit(fromState, args)
 	}
